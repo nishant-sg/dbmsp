@@ -1,4 +1,7 @@
 import React, {useState, useEffect} from "react";
+import { Action } from "./Action";
+import { HeaderCell } from "./HeaderCell";
+import { RowCell } from "./RowCell";
 
 const TableDetail = ({table}) => {
     
