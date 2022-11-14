@@ -13,7 +13,7 @@ router.post("/drop", async (req, res) => {
 
 router.post("/create", async (req, res) => {
   connection.query(
-    "create table TrackingDetail(TrackingNo int PRIMARY KEY, OrderNo int not null, Courier varchar(30) not null, City varchar(30) not null, State varchar(30) not null, Pincode int not null, Deadline date not null, FOREIGN KEY(OrderNo) REFERENCES Order(OrderNo) ON DELETE CASCADE ON UPDATE CASCADE)",
+    "create table if not exists TrackingDetail(TrackingNo int PRIMARY KEY, OrderNo int not null, Courier varchar(30) not null, City varchar(30) not null, State varchar(30) not null, Pincode int not null, Deadline date not null, FOREIGN KEY(OrderNo) REFERENCES Order(OrderNo) ON DELETE CASCADE ON UPDATE CASCADE)",
     (err) => {
       if (err) {
         console.error(err);
@@ -59,8 +59,7 @@ router.post("/selectedrows", async (req, res) => {
 
 router.post("/insert", async (req, res) => {
   connection.query(
-    "insert into TrackingDetail values ?",
-    [req.body["message"]],
+    `insert into TrackingDetail values (${req.body["message"]})`,
     (err, result) => {
       if (err) {
         console.error(err);

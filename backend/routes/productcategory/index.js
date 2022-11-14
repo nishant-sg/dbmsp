@@ -13,7 +13,7 @@ router.post("/drop", async (req, res) => {
 
 router.post("/create", async (req, res) => {
   connection.query(
-    "create table ProductCategory(CategoryId int primary key, AdminId int not null, CategoryName varchar(30) not null, TotalItems int not null, FOREIGN KEY (AdminId) REFERENCES Admin(AdminId) ON UPDATE CASCADE ON DELETE CASCADE)",
+    "create table if not exists ProductCategory(CategoryId int primary key, AdminId int not null, CategoryName varchar(30) not null, TotalItems int not null, FOREIGN KEY (AdminId) REFERENCES Admin(AdminId) ON UPDATE CASCADE ON DELETE CASCADE)",
     (err) => {
       if (err) {
         console.error(err);
@@ -59,8 +59,7 @@ router.post("/selectedrows", async (req, res) => {
 
 router.post("/insert", async (req, res) => {
   connection.query(
-    "insert into ProductCategory values ?",
-    [req.body["message"]],
+    `insert into ProductCategory values (${req.body["message"]})`,
     (err, result) => {
       if (err) {
         console.error(err);

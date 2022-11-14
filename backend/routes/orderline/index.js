@@ -14,7 +14,7 @@ orderlineRouter.post("/drop", async (req, res) => {
 
 orderlineRouter.post("/create", async (req, res) => {
   connection.query(
-    "create table OrderLine(OrderNo int not null, ProductId int not null, Quantity int not null, FOREIGN KEY(OrderNo) REFERENCES Order(OrderNo) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY(ProductId) REFERENCES Product(ProductId) ON DELETE CASCADE ON UPDATE CASCADE)",
+    "create table if not exists OrderLine(OrderNo int not null, ProductId int not null, Quantity int not null, FOREIGN KEY(OrderNo) REFERENCES Order(OrderNo) ON DELETE CASCADE ON UPDATE CASCADE, FOREIGN KEY(ProductId) REFERENCES Product(ProductId) ON DELETE CASCADE ON UPDATE CASCADE)",
     (err) => {
       if (err) {
         console.error(err);
@@ -60,8 +60,7 @@ orderlineRouter.post("/selectedrows", async (req, res) => {
 
 orderlineRouter.post("/insert", async (req, res) => {
   connection.query(
-    "insert into OrderLine values ?",
-    [req.body["message"]],
+    `insert into Orderline values (${req.body["message"]})`,
     (err, result) => {
       if (err) {
         console.error(err);

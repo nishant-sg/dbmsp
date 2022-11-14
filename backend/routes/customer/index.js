@@ -14,7 +14,7 @@ router.post("/drop", async (req, res) => {
 
 router.post("/create", async (req, res) => {
   connection.query(
-    "create table Customer(CustomerId int primary key, FN varchar(30) not null, LN varchar(30), City varchar(30) not null, State varchar(30) not null, Pincode int not null, Email varchar(50) not null, CustomerType varchar(1) not null",
+    "create table if not exists Customer(CustomerId int primary key, FN varchar(30) not null, LN varchar(30) not null, City varchar(30) not null, State varchar(30) not null, Pincode int not null, Email varchar(50) not null, CustomerType varchar(1) not null)",
     (err) => {
       if (err) {
         console.error(err);
@@ -60,8 +60,7 @@ router.post("/selectedrows", async (req, res) => {
 
 router.post("/insert", async (req, res) => {
   connection.query(
-    "insert into Customer values ?",
-    [req.body["message"]],
+    `insert into Customer values (${req.body["message"]})`,
     (err, result) => {
       if (err) {
         console.error(err);
