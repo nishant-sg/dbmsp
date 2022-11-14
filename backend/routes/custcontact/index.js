@@ -14,7 +14,7 @@ router.post("/drop", async (req, res) => {
 
 router.post("/create", async (req, res) => {
   connection.query(
-    "create table CustContact(CustomerId int not null, PhoneNo int PRIMARY KEY, FOREIGN KEY(CustomerId) REFERENCES Customer(CustomerId) ON DELETE CASCADE ON UPDATE CASCADE)",
+    "create table if not exists CustContact(CustomerId int not null, PhoneNo int PRIMARY KEY, FOREIGN KEY(CustomerId) REFERENCES Customer(CustomerId) ON DELETE CASCADE ON UPDATE CASCADE)",
     (err) => {
       if (err) {
         console.error(err);
@@ -60,8 +60,7 @@ router.post("/selectedrows", async (req, res) => {
 
 router.post("/insert", async (req, res) => {
   connection.query(
-    "insert into CustContact values ?",
-    [req.body["message"]],
+    `insert into CustContact values (${req.body["message"]})`,
     (err, result) => {
       if (err) {
         console.error(err);

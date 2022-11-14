@@ -18,7 +18,7 @@ router.post("/drop", async (req, res) => {
 
 router.post("/create", async (req, res) => {
   connection.query(
-    "create table Admin(AdminId int primary key, FN varchar(30) not null, LN varchar(30), Password varchar(30) not null)",
+    "create table if not exists Admin(AdminId int primary key, FN varchar(30) not null, LN varchar(30) not null, Password varchar(30) not null)",
     (err) => {
       if (err) {
         console.error(err);
@@ -35,6 +35,8 @@ router.post("/allrows", async (req, res) => {
       console.error(err);
       return res.status(400).json({ success: false, error: err });
     }
+    let columns = Object.keys(result[0]);
+    console.log(columns);
     let rows = [];
     Object.keys(result).forEach(function (key) {
       let row = result[key];
@@ -64,8 +66,7 @@ router.post("/selectedrows", async (req, res) => {
 
 router.post("/insert", async (req, res) => {
   connection.query(
-    "insert into Admin values ?",
-    [req.body["message"]],
+    `insert into Admin values (${req.body["message"]})`,
     (err, result) => {
       if (err) {
         console.error(err);

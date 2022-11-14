@@ -13,7 +13,7 @@ router.post("/drop", async (req, res) => {
 
 router.post("/create", async (req, res) => {
   connection.query(
-    "create table Unsubscribed(UCustId int not null, TimeSpent int not null, FOREIGN KEY(UCustId) REFERENCES Customer(CustomerId) ON DELETE CASCADE ON UPDATE CASCADE)",
+    "create table if not exists Unsubscribed(UCustId int not null, TimeSpent int not null, FOREIGN KEY(UCustId) REFERENCES Customer(CustomerId) ON DELETE CASCADE ON UPDATE CASCADE)",
     (err) => {
       if (err) {
         console.error(err);
@@ -24,7 +24,7 @@ router.post("/create", async (req, res) => {
 });
 
 router.post("/allrows", async (req, res) => {
-  connection.query("select * from Admin", (err, result) => {
+  connection.query("select * from Unsubscribed", (err, result) => {
     if (err) {
       console.error(err);
       return res.status(400).json({ success: false, error: err });
@@ -40,7 +40,7 @@ router.post("/allrows", async (req, res) => {
 
 router.post("/selectedrows", async (req, res) => {
   connection.query(
-    `select * from Admin where ${req.body["message"]}`,
+    `select * from Unsubscribed where ${req.body["message"]}`,
     (err, result) => {
       if (err) {
         console.error(err);
@@ -58,8 +58,7 @@ router.post("/selectedrows", async (req, res) => {
 
 router.post("/insert", async (req, res) => {
   connection.query(
-    "insert into Admin values ?",
-    [req.body["message"]],
+    `insert into Unsubscribed values (${req.body["message"]})`,
     (err, result) => {
       if (err) {
         console.error(err);
@@ -71,13 +70,16 @@ router.post("/insert", async (req, res) => {
 });
 
 router.post("/update", async (req, res) => {
-  connection.query(`update Admin ${req.body["message"]}`, (err, result) => {
-    if (err) {
-      console.error(err);
-      return res.status(400).json({ success: false, error: err });
+  connection.query(
+    `update Unsubscribed ${req.body["message"]}`,
+    (err, result) => {
+      if (err) {
+        console.error(err);
+        return res.status(400).json({ success: false, error: err });
+      }
+      return res.status(200).json({ success: true, result: result.message });
     }
-    return res.status(200).json({ success: true, result: result.message });
-  });
+  );
 });
 
 router.post("/delete", async (req, res) => {

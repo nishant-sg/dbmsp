@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const RowCell = () => {
+export const RowCell = ({content}) => {
   return (
     <div
         style={{
@@ -12,6 +12,7 @@ export const RowCell = () => {
             margin: "0px"
         }}
         >
+          {content}
     </div>
   )
 }

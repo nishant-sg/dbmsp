@@ -3,6 +3,7 @@ import LeftNavBtns from "./LeftNavBtns";
 import tables from "../constants/tables";
 
 const LeftNavigation = ({setTable}) => {
+  
   return (
     <div className="left">
       <div className="border">

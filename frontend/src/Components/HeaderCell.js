@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const HeaderCell = () => {
+export const HeaderCell = ({content}) => {
   return (
     <div
         style={{
@@ -13,6 +13,7 @@ export const HeaderCell = () => {
             margin: "0px"
         }}
         >
+          {content}
     </div>
   )
 }
