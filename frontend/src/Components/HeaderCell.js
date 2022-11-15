@@ -1,19 +1,21 @@
-import React from 'react'
+import React from "react";
 
-export const HeaderCell = ({content}) => {
+export const HeaderCell = ({ content }) => {
   return (
     <div
-        style={{
-            background: "black",
-            color: "white",
-            border: "2px solid black",
-            height: "20px",
-            width: "130px",
-            padding: "5px",
-            margin: "0px"
-        }}
-        >
-          {content}
+      style={{
+        background: "black",
+        color: "white",
+        textAlign: "center",
+        fontWeight: "700",
+        fontSize: "20px",
+        border: "2px solid white",
+        width: "150px",
+        padding: "5px",
+        margin: "0px",
+      }}
+    >
+      {content}
     </div>
-  )
-}
+  );
+};

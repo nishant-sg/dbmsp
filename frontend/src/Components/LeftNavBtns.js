@@ -4,6 +4,7 @@ const LeftNavBtns = ({ name, setTable }) => {
   return (
     <div className="DBelector">
       <button
+        style={{ height: "fit-content" }}
         onClick={() => {
           setTable(name);
         }}

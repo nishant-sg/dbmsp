@@ -5,9 +5,11 @@ import tables from "../constants/tables";
 
 const RightMenu = ({ table }) => {
   let apiEndpoint = "";
+  let queryName = "";
   tables.forEach((tableDetail) => {
     if (tableDetail.name === table) {
       apiEndpoint = tableDetail.api;
+      queryName = tableDetail.queryName;
     }
   });
 
@@ -23,14 +25,9 @@ const RightMenu = ({ table }) => {
     setLoading(false);
   };
 
-  useEffect(
-    () => {
-      // createTable();
-    },
-    [
-      // table
-    ]
-  );
+  useEffect(() => {
+    createTable();
+  }, [table]);
 
   return (
     <>
@@ -45,7 +42,11 @@ const RightMenu = ({ table }) => {
       ) : (
         <div>
           <Header table={table} />
-          <TableDetail table={table} apiEndpoint={apiEndpoint} />
+          <TableDetail
+            table={table}
+            apiEndpoint={apiEndpoint}
+            queryName={queryName}
+          />
         </div>
       )}
     </>

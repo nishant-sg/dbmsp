@@ -13,7 +13,7 @@ router.post("/drop", async (req, res) => {
 
 router.post("/create", async (req, res) => {
   connection.query(
-    "create table if not exists ProductCategory(CategoryId int primary key, AdminId int not null, CategoryName varchar(30) not null, TotalItems int not null, FOREIGN KEY (AdminId) REFERENCES Admin(AdminId) ON UPDATE CASCADE ON DELETE CASCADE)",
+    "create table if not exists ProductCategory(CategoryId int primary key, ProductCategoryId int not null, CategoryName varchar(30) not null, TotalItems int not null, FOREIGN KEY (ProductCategoryId) REFERENCES ProductCategory(ProductCategoryId) ON UPDATE CASCADE ON DELETE CASCADE)",
     (err) => {
       if (err) {
         console.error(err);
@@ -22,6 +22,21 @@ router.post("/create", async (req, res) => {
     }
   );
   return res.status(200).json({ success: true });
+});
+
+router.get("/scheme", async (req, res) => {
+  connection.query("describe ProductCategory", (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(400).json({ success: false, error: err });
+    }
+    let columns = [];
+    Object.keys(result).forEach(function (key) {
+      let column = result[key];
+      columns.push(column["Field"]);
+    });
+    return res.status(200).json({ success: true, result: columns });
+  });
 });
 
 router.post("/allrows", async (req, res) => {

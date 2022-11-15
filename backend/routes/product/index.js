@@ -24,6 +24,21 @@ router.post("/create", async (req, res) => {
   return res.status(200).json({ success: true });
 });
 
+router.get("/scheme", async (req, res) => {
+  connection.query("describe Product", (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(400).json({ success: false, error: err });
+    }
+    let columns = [];
+    Object.keys(result).forEach(function (key) {
+      let column = result[key];
+      columns.push(column["Field"]);
+    });
+    return res.status(200).json({ success: true, result: columns });
+  });
+});
+
 router.post("/allrows", async (req, res) => {
   connection.query("select * from Product", (err, result) => {
     if (err) {
