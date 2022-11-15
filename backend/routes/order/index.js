@@ -14,7 +14,7 @@ router.post("/drop", async (req, res) => {
 
 router.post("/create", async (req, res) => {
   connection.query(
-    "create table if not exists Order(OrderNo number PRIMARY KEY, OrderDate date not null, OrderAmount number not null, CustId number not null, FOREIGN KEY(CustId) REFERENCES Customer(CustomerId) ON DELETE CASCADE ON UPDATE CASCADE)",
+    "create table if not exists Order(OrderNo int PRIMARY KEY, OrderDate date not null, OrderAmount int not null, CustId int not null, FOREIGN KEY(CustId) REFERENCES Customer(CustomerId) ON DELETE CASCADE ON UPDATE CASCADE)",
     (err) => {
       if (err) {
         console.error(err);
