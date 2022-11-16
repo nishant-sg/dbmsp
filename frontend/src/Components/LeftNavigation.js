@@ -9,9 +9,10 @@ const LeftNavigation = ({setTable}) => {
       <div className="border">
         <h2>Choose Table</h2>
       </div>
+      <div className="left-down">
       {Array.from(tables).map((table, index) => {
         return <LeftNavBtns name={table.name} key={index} setTable={setTable}/>;
-      })}
+      })}</div>
     </div>
   );
 };

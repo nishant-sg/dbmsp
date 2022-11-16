@@ -9,28 +9,35 @@
 .left {
   height: 100vh;
   width: 20vw;
-  background-color: grey;
+  background-color: #1B262C;
   display: flex;
   align-items: center;
   flex-direction: column;
   border-right: 1px solid black;
 }
 
+.left-down {
+  width: 100%;
+  overflow-y: scroll;
+}
+
+
 .header {
   display: flex;
+  background-color: #1B262C;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 0 50px;
-  border-bottom: 1px solid black;
+  color: #BBE1FA;
   margin-bottom: 10px;
 }
 
 .DBelector button {
-  background-color: white;
-  color: black;
+  background-color: #0F4C75;
+  color: #BBE1FA;
   cursor: pointer;
-  height: 25px;
+  padding: 10px;
   width: 70%;
   display: block;
   border-radius: 3px;
@@ -42,6 +49,8 @@
 
 .border h2 {
   font-size: 30px;
+
+  color: #BBE1FA;
   text-transform: uppercase;
 }
 
@@ -56,7 +65,7 @@
 }
 
 .DBelector button:hover {
-  background-color: black;
+  background-color: #3282B8;
   color: white;
 }
 
@@ -71,7 +80,7 @@
 .right {
   height: 100vh;
   width: 80vw;
-  background-color: white;
+  background-color: #0F4C75;
   display: flex;
   align-items: left;
   flex-direction: column;
@@ -87,7 +96,7 @@
 }
 
 .button1 {
-  background-color: black;
+  background-color: #1B262C;
   border: none;
   border-radius: 10px;
   color: white;
@@ -119,11 +128,12 @@
 
 .cond {
   display: flex;
-  border-bottom: 1px solid black;
   width: fit-content;
 }
 
 .cond input {
+  padding: 10px;
+  border-radius: 10px;
   font-size: 15px;
 }
 
@@ -139,9 +149,10 @@
 
 .submit input {
   background-color: black;
-  color: white;
+  color: #0F4C75;
   border: none;
   font-size: 15px;
+  font-weight: bold;
   text-transform: uppercase;
   border-radius: 25px;
   padding: 10px 20px;
@@ -150,7 +161,7 @@
 }
 
 .submit input:hover {
-  background-color: grey;
+  background-color: #3282B8;
   color: black;
 }
 
